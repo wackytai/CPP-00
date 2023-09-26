@@ -1,14 +1,16 @@
 #include <iostream>
+using namespace std;
 
 int	main(int argc, char **argv)
 {
-	if (argc <= 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+	if (argc < 2)
+		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 	else
 	{
 		for (int i = 1; i < argc; i++)
-			std::cout << argv[i];
-		std::cout << std::endl;
+			for (int j = 0; argv[i][j]; j++)
+				cout << (char)toupper(argv[i][j]);
 	}
+	cout << endl;
 	return 0;
 }
