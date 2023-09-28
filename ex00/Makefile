@@ -1,5 +1,5 @@
 NAME = megaphone
-SRC_FILES = *.cpp
+SRC_FILES = megaphone.cpp
 CC = @c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address,undefined
 
