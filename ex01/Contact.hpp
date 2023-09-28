@@ -22,4 +22,4 @@ class Contact
 		std::string	get_nickame(std::string name);
 		std::string	get_phone_number(std::string number);
 		std::string	get_secret(std::string secret);
-}
+};
