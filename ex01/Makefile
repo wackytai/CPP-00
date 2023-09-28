@@ -1,5 +1,5 @@
 NAME = phonebook
-SRC_FILES = PhoneBook.cpp Contact.cpp
+SRC_FILES = PhoneBook.cpp Contact.cpp main.cpp
 CC = @c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address,undefined
 
