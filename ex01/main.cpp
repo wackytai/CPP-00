@@ -73,7 +73,6 @@ int	get_index(PhoneBook &myPhoneBook)
 	std::cout << "Input contact index: ";
 	std::cin >> input;
 	myPhoneBook.search_contact(input);
-	std::cin.clear();
 	std::cin.ignore();
 	return 0;
 }
