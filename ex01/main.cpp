@@ -1,9 +1,12 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
 
+int	get_info(PhoneBook &myPhoneBook);
+int	get_index(PhoneBook &myPhoneBook);
+
 int	main(void)
 {
-	PhoneBook	phonebook;
+	PhoneBook	myPhoneBook;
 	std::string	str;
 	
 	while (1)
@@ -14,31 +17,63 @@ int	main(void)
 			return 0;
 		std::cin.clear();
 		if (str == "ADD")
-		{
-			
-			phonebook.add_contact();
-		}
+			get_info(myPhoneBook);
 		else if (str == "SEARCH")
-			phonebook.search_contact();
+			get_index(myPhoneBook);
 		else if (str == "EXIT")
-			return 0;
+			break ;
+		else
+			std::cout << "Not a valid input" << std::endl;
+	}
+	return 0;
+}
+int	get_info(PhoneBook &myPhoneBook)
+{
+	std::string	value;
+	std::string	prompt;
+
+	for (int i = 0; i < 5; i++)
+	{
+		switch(i)
+		{
+			case 0:
+				prompt = "First Name";
+				break ;
+			case 1:
+				prompt = "Last Name";
+				break ;
+			case 2:
+				prompt = "Nickname";
+				break ;
+			case 3:
+				prompt = "Phone Number";
+				break ;
+			case 4:
+				prompt = "Darkest Secret";
+				break ;
+		}
+		std::cout << "Input " << prompt << ": ";
+		std::getline(std::cin, value);
+		if (std::cin.eof())
+		{
+			prompt.clear();
+			value.clear();
+			return 1;
+		}
+		if (myPhoneBook.add_contact(value, i))
+			return 1;
 	}
 	return 0;
 }
 
-int	get_info(std::string field, int flag)
+int	get_index(PhoneBook &myPhoneBook)
 {
-	std::string	str;
-	while (1)
-	{
-		std::cout << "Input " << field << ": ";
-		std::getline(std::cin, str);
-		if (std::cin.eof())
-		{
-			str.clear();
-			return 0;
-		}
-		std::cin.clear();
-	}
+	int	input;
+
+	std::cout << "Input contact index: ";
+	std::cin >> input;
+	myPhoneBook.search_contact(input);
+	std::cin.clear();
+	std::cin.ignore();
 	return 0;
 }

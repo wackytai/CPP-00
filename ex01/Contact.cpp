@@ -45,7 +45,7 @@ const std::string	Contact::get_last_name(void) const
 	return (this->_lastName);
 }
 
-const std::string	Contact::get_nickame(void) const
+const std::string	Contact::get_nickname(void) const
 {
 	return (this->_nickname);
 }

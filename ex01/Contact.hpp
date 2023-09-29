@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 class Contact
 {
@@ -21,7 +22,7 @@ class Contact
 		void	set_secret(std::string secret);
 		const std::string	get_first_name(void) const;
 		const std::string	get_last_name(void) const;
-		const std::string	get_nickame(void) const;
+		const std::string	get_nickname(void) const;
 		const std::string	get_phone_number(void) const;
 		const std::string	get_secret(void) const;
 };

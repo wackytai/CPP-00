@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include "Contact.hpp"
 
 class PhoneBook
@@ -13,6 +14,8 @@ class PhoneBook
 		PhoneBook();
 		~PhoneBook();
 
-		int	add_contact(void);
-		int	search_contact(void);
+		int		add_contact(std::string value, int field);
+		int		search_contact(int index);
+		void	printField(std::string field);
+		void	printList(void);
 };

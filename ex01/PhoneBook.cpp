@@ -12,41 +12,86 @@ PhoneBook:: ~PhoneBook()
 	// std::cout << "PhoneBook destructor called\n";
 }
 
-int	PhoneBook::add_contact(void)
+int	PhoneBook::add_contact(std::string value, int field)
 {
-	std::string	str;
-	std::string	prompt;
-
-	for(int i = 0; i < 5; i++)
+	if (_currentSize >= 7)
 	{
-		switch(i){
+		std::cout << "Limit of contacts reached\n";
+		return 1;
+	}
+	else if (value.empty())
+	{
+		std::cout << "Cannot add contact: Empty field entered\n";
+		return 1;
+	}
+	else
+	{
+		switch(field)
+		{
 			case 0:
-				prompt = "First Name";
+				_contacts[_index].set_first_name(value);
 				break ;
 			case 1:
-				prompt = "Last Name";
+				_contacts[_index].set_last_name(value);
 				break ;
 			case 2:
-				prompt = "Nickname";
+				_contacts[_index].set_nickname(value);
 				break ;
 			case 3:
-				prompt = "Phone Number";
+				_contacts[_index].set_phone_number(value);
 				break ;
 			case 4:
-				prompt = "Darkest Secret";
+				_contacts[_index].set_secret(value);
+				this->_index++;
+				this->_currentSize++;
 				break ;
 		}
-		std::cout << "Input " << prompt << ": "; 
-		std::getline(std::cin, str);
-		if (std::cin.eof())
-			return 1;
 	}
-	this->_index++;
-	this->_currentSize++;
 	return 0;
 }
 
-int	PhoneBook::search_contact(void)
+int	PhoneBook::search_contact(int index)
 {
-	return 0;
+	if (index > _currentSize || index < 0 || !_currentSize)
+	{
+		std::cout << "Index out of range: Can't find contact speficied\n";
+		return 1;
+	}
+	else
+	{
+		std::cout << index << "|";
+		printField(_contacts[index].get_first_name());
+		std::cout << "|";
+		printField(_contacts[index].get_last_name());
+		std::cout << "|";
+		printField(_contacts[index].get_nickname());
+		std::cout << std::endl;
+		return 0;
+	}
+}
+
+void	PhoneBook::printList(void)
+{
+	for (int i = 0; i < _currentSize; i++)
+	{
+		std::cout << _contacts[i].get_first_name() << " "
+		<< _contacts[i].get_last_name() << " "
+		<< _contacts[i].get_nickname() << " "
+		<< _contacts[i].get_phone_number() << " "
+		<< _contacts[i].get_secret();
+		std::cout << std::endl;
+	}
+}
+
+void	PhoneBook::printField(std::string field)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		if (i == 9 && field[i + 1])
+			std::cout << ".";
+		else if (field[i])
+			std::cout << field[i];
+		else
+			break ;
+	}
 }
