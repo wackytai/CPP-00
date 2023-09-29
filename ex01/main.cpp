@@ -2,6 +2,7 @@
 #include "Contact.hpp"
 
 int	get_info(PhoneBook &myPhoneBook);
+int	validate_input(std::string input, int field);
 int	get_index(PhoneBook &myPhoneBook);
 
 int	main(void)
@@ -60,8 +61,31 @@ int	get_info(PhoneBook &myPhoneBook)
 			value.clear();
 			return 1;
 		}
-		if (myPhoneBook.add_contact(value, i))
+		if (validate_input(value, i))
+		{
+			std::cout << "Wrong input for field. Start Again" << std::endl;
 			return 1;
+		}
+		else if (myPhoneBook.add_contact(value, i))
+			return 1;
+	}
+	return 0;
+}
+
+int	validate_input(std::string input, int field)
+{
+	switch (field)
+	{
+		case 0: case 1: case 2: case 4:
+			for (int i = 0; input[i]; i++)
+				if (!std::isalpha(input[i]) && input[i] != 32)
+					return 1;
+			break ;
+		case 3:
+			for (int i = 0; input[i]; i++)
+				if (!std::isdigit(input[i]))
+					return 1;
+			break ;
 	}
 	return 0;
 }
