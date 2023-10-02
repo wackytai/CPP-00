@@ -58,11 +58,11 @@ int	PhoneBook::search_contact(void)
 	if (std::cin.eof())
 	{
 		std::cin.clear();
-		std::cin.ignore((unsigned int)input.length(), '\n');
+		std::cin.ignore((unsigned int)input.length() - 1, '\n');
 		return 1;
 	}
 	printContact(std::atoi(input.c_str()));
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.ignore((unsigned int)input.length() - 1, '\n');
 	return 0;
 }
 
@@ -79,6 +79,7 @@ void	PhoneBook::printContact(int index)
 		std::cout << "Phone Number: " << _contacts[index].get_phone_number() << std::endl;
 		std::cout << "Darkest Secret: " << _contacts[index].get_secret() << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 void	PhoneBook::printList(void)
