@@ -27,6 +27,7 @@ int	main(void)
 	}
 	return 0;
 }
+
 int	get_info(PhoneBook &myPhoneBook)
 {
 	std::string	value;
@@ -63,7 +64,7 @@ int	get_info(PhoneBook &myPhoneBook)
 		if (validate_input(value, i))
 		{
 			std::cout << "Wrong input for field. Start Again" << std::endl;
-			std::cin.ignore(value.length(), '\n');
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			value.clear();
 			return 1;
 		}

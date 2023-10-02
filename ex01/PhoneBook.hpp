@@ -4,13 +4,13 @@
 #include <string>
 #include <cstdlib>
 #include <cstring>
+#include <limits>
 #include "Contact.hpp"
 
 class PhoneBook
 {
 	private:
 		Contact _contacts[8];
-		int		_index;
 		int		_currentSize;
 	public:
 		PhoneBook();

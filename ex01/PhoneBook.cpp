@@ -2,7 +2,6 @@
 
 PhoneBook:: PhoneBook()
 {
-	_index = 0;
 	_currentSize = 0;
 	// std::cout << "PhoneBook constructor called\n";
 }
@@ -29,20 +28,19 @@ int	PhoneBook::add_contact(std::string value, int field)
 		switch(field)
 		{
 			case 0:
-				_contacts[_index].set_first_name(value);
+				_contacts[_currentSize].set_first_name(value);
 				break ;
 			case 1:
-				_contacts[_index].set_last_name(value);
+				_contacts[_currentSize].set_last_name(value);
 				break ;
 			case 2:
-				_contacts[_index].set_nickname(value);
+				_contacts[_currentSize].set_nickname(value);
 				break ;
 			case 3:
-				_contacts[_index].set_phone_number(value);
+				_contacts[_currentSize].set_phone_number(value);
 				break ;
 			case 4:
-				_contacts[_index].set_secret(value);
-				this->_index++;
+				_contacts[_currentSize].set_secret(value);
 				this->_currentSize++;
 				break ;
 		}
@@ -64,12 +62,7 @@ int	PhoneBook::search_contact(void)
 		return 1;
 	}
 	printContact(std::atoi(input.c_str()));
-	std::cin.ignore((unsigned int)input.length(), '\n');
-	if (std::cin.eof())
-	{
-		std::cin.clear();
-		std::cin.ignore((unsigned int)input.length(), '\n');
-	}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return 0;
 }
 
@@ -86,7 +79,6 @@ void	PhoneBook::printContact(int index)
 		std::cout << "Phone Number: " << _contacts[index].get_phone_number() << std::endl;
 		std::cout << "Darkest Secret: " << _contacts[index].get_secret() << std::endl;
 	}
-	return;
 }
 
 void	PhoneBook::printList(void)
