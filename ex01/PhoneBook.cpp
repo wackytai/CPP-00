@@ -16,12 +16,12 @@ int	PhoneBook::add_contact(std::string value, int field)
 {
 	if (_currentSize >= 7)
 	{
-		std::cout << "Limit of contacts reached\n";
+		std::cout << "Limit of contacts reached" << std::endl;
 		return 1;
 	}
 	else if (value.empty())
 	{
-		std::cout << "Cannot add contact: Empty field entered\n";
+		std::cout << "Cannot add contact: Empty field entered" << std::endl;
 		return 1;
 	}
 	else
@@ -50,47 +50,76 @@ int	PhoneBook::add_contact(std::string value, int field)
 	return 0;
 }
 
-int	PhoneBook::search_contact(int index)
+int	PhoneBook::search_contact(void)
 {
-	if (index > _currentSize || index < 0 || !_currentSize)
+	std::string input;
+
+	printList();
+	std::cout << "Input Contact Index:" << std::endl;
+	std::getline(std::cin, input);
+	if (std::cin.eof())
 	{
-		std::cout << "Index out of range: Can't find contact speficied\n";
+		std::cin.clear();
+		std::cin.ignore((unsigned int)input.length(), '\n');
 		return 1;
 	}
+	printContact(std::atoi(input.c_str()));
+	std::cin.ignore((unsigned int)input.length(), '\n');
+	if (std::cin.eof())
+	{
+		std::cin.clear();
+		std::cin.ignore((unsigned int)input.length(), '\n');
+	}
+	return 0;
+}
+
+void	PhoneBook::printContact(int index)
+{
+	if (index > _currentSize || index < 0 || !_currentSize)
+		std::cout << "Index out of range: Can't find contact speficied" << std::endl;
 	else
 	{
-		std::cout << index << "|";
-		printField(_contacts[index].get_first_name());
-		std::cout << "|";
-		printField(_contacts[index].get_last_name());
-		std::cout << "|";
-		printField(_contacts[index].get_nickname());
-		std::cout << std::endl;
-		return 0;
+		std::cout << "Index: " << index << std::endl;
+		std::cout << "First Name: " << _contacts[index].get_first_name() << std::endl;
+		std::cout << "Last Name: " << _contacts[index].get_last_name() << std::endl;
+		std::cout << "Nickname: " << _contacts[index].get_nickname() << std::endl;
+		std::cout << "Phone Number: " << _contacts[index].get_phone_number() << std::endl;
+		std::cout << "Darkest Secret: " << _contacts[index].get_secret() << std::endl;
 	}
+	return;
 }
 
 void	PhoneBook::printList(void)
 {
+	std::cout << "     Index" << "|" << "First Name" << "|" << " Last Name" << "|" << "  Nickname" << std::endl;  
 	for (int i = 0; i < _currentSize; i++)
 	{
-		std::cout << _contacts[i].get_first_name() << " "
-		<< _contacts[i].get_last_name() << " "
-		<< _contacts[i].get_nickname() << " "
-		<< _contacts[i].get_phone_number() << " "
-		<< _contacts[i].get_secret();
+		std::cout << "         " << i << "|";
+		printField(_contacts[i].get_first_name());
+		std::cout << "|";
+		printField(_contacts[i].get_last_name());
+		std::cout << "|";
+		printField(_contacts[i].get_nickname());
 		std::cout << std::endl;
 	}
 }
 
 void	PhoneBook::printField(std::string field)
 {
+	size_t	len;
+
+	len = field.length();
 	for (int i = 0; i < 10; i++)
 	{
-		if (i == 9 && field[i + 1])
+		if (i == 9 && len > 10)
 			std::cout << ".";
 		else if (field[i])
+		{
+			if (len < 10 && !i)
+				for (size_t j = 0; j < (10 - len); j++)
+					std::cout << " ";
 			std::cout << field[i];
+		}
 		else
 			break ;
 	}

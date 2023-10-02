@@ -3,7 +3,6 @@
 
 int	get_info(PhoneBook &myPhoneBook);
 int	validate_input(std::string input, int field);
-int	get_index(PhoneBook &myPhoneBook);
 
 int	main(void)
 {
@@ -12,7 +11,7 @@ int	main(void)
 	
 	while (1)
 	{
-		std::cout << "Choose between: ADD, SEARCH and EXIT\n> ";
+		std::cout << "Choose between: ADD, SEARCH and EXIT" << std::endl;
 		std::getline(std::cin, str);
 		if (std::cin.eof())
 			return 0;
@@ -20,7 +19,7 @@ int	main(void)
 		if (str == "ADD")
 			get_info(myPhoneBook);
 		else if (str == "SEARCH")
-			get_index(myPhoneBook);
+			myPhoneBook.search_contact();
 		else if (str == "EXIT")
 			break ;
 		else
@@ -64,6 +63,8 @@ int	get_info(PhoneBook &myPhoneBook)
 		if (validate_input(value, i))
 		{
 			std::cout << "Wrong input for field. Start Again" << std::endl;
+			std::cin.ignore(value.length(), '\n');
+			value.clear();
 			return 1;
 		}
 		else if (myPhoneBook.add_contact(value, i))
@@ -78,7 +79,8 @@ int	validate_input(std::string input, int field)
 	{
 		case 0: case 1: case 2: case 4:
 			for (int i = 0; input[i]; i++)
-				if (!std::isalpha(input[i]) && input[i] != 32)
+				if ((!std::isalpha(input[i]) && input[i] != 32)
+					|| (input[i + 1] && input[i] == 32 && input[i + 1] == 32))
 					return 1;
 			break ;
 		case 3:
@@ -87,16 +89,5 @@ int	validate_input(std::string input, int field)
 					return 1;
 			break ;
 	}
-	return 0;
-}
-
-int	get_index(PhoneBook &myPhoneBook)
-{
-	int	input;
-
-	std::cout << "Input contact index: ";
-	std::cin >> input;
-	myPhoneBook.search_contact(input);
-	std::cin.ignore();
 	return 0;
 }
