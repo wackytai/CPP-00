@@ -12,6 +12,7 @@ class PhoneBook
 	private:
 		Contact _contacts[8];
 		int		_currentSize;
+		int		_index;
 	public:
 		PhoneBook();
 		~PhoneBook();
@@ -19,6 +20,6 @@ class PhoneBook
 		int		add_contact(std::string value, int field);
 		int		search_contact(void);
 		void	printField(std::string field);
-		void	printList(void);
+		int		printList(void);
 		void	printContact(int index);
 };

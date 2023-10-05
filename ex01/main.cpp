@@ -12,10 +12,13 @@ int	main(void)
 	while (1)
 	{
 		std::cout << "Choose between: ADD, SEARCH and EXIT" << std::endl;
-		std::getline(std::cin, str);
-		if (std::cin.eof())
-			return 0;
-		std::cin.clear();
+		if (!std::getline(std::cin, str))
+		{
+			if (std::cin.eof())
+				break;
+			else
+				return 1;
+		}
 		if (str == "ADD")
 			get_info(myPhoneBook);
 		else if (str == "SEARCH")
@@ -39,19 +42,19 @@ int	get_info(PhoneBook &myPhoneBook)
 		{
 			case 0:
 				prompt = "First Name";
-				break ;
+				break;
 			case 1:
 				prompt = "Last Name";
-				break ;
+				break;
 			case 2:
 				prompt = "Nickname";
-				break ;
+				break;
 			case 3:
 				prompt = "Phone Number";
-				break ;
+				break;
 			case 4:
 				prompt = "Darkest Secret";
-				break ;
+				break;
 		}
 		std::cout << "Input " << prompt << ": ";
 		std::getline(std::cin, value);
@@ -63,8 +66,7 @@ int	get_info(PhoneBook &myPhoneBook)
 		}
 		if (validate_input(value, i))
 		{
-			std::cout << "Wrong input for field. Try Again" << std::endl;
-			std::cin.ignore(value.length() - 1, '\n');
+			std::cout << "Wrong input for field. Start Again" << std::endl;
 			value.clear();
 			return 1;
 		}
@@ -83,12 +85,12 @@ int	validate_input(std::string input, int field)
 				if ((!std::isalpha(input[i]) && input[i] != 32)
 					|| (input[i + 1] && input[i] == 32 && input[i + 1] == 32))
 					return 1;
-			break ;
+			break;
 		case 3:
 			for (int i = 0; input[i]; i++)
 				if (!std::isdigit(input[i]))
 					return 1;
-			break ;
+			break;
 	}
 	return 0;
 }
