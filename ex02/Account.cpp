@@ -18,15 +18,14 @@ Account::Account( int initial_deposit ) : _accountIndex(_nbAccounts), _amount(in
     //std::cout << " Public Constructor called" << std::endl;
     _nbAccounts++;
     _totalAmount += _amount;
-    displayStatus();
-    std::cout << "created" << std::endl;
+    _displayTimestamp();
+    std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";" << "created" << std::endl;
 }
 
 Account::~Account( void )
 {
     //std::cout << "Destructor called" << std::endl;
-    displayStatus();
-    std::cout << "closed" << std::endl;
+    std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";" << "closed" << std::endl;
 
 }
 
@@ -53,7 +52,7 @@ int	Account::getNbWithdrawals( void )
 void	Account::displayAccountsInfos( void )
 {
     _displayTimestamp();
-    std::cout << "accounts:" << getNbAccounts() << ";amount:" << getTotalAmount() << ";deposits:" << getNbDeposits() << ";withdrawals:" << getNbWithdrawals() << std::endl;
+    std::cout << "accounts:" << getNbAccounts() << ";total:" << getTotalAmount() << ";deposits:" << getNbDeposits() << ";withdrawals:" << getNbWithdrawals() << std::endl;
 }
 
 void	Account::makeDeposit( int deposit )
@@ -94,8 +93,7 @@ int		Account::checkAmount( void ) const
 void	Account::displayStatus( void ) const
 {
     _displayTimestamp();
-    std::cout << "index:" << this->_accountIndex
-    << ";amount:" << this->_amount << ";" << std::flush;
+    std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";deposits:" << _nbDeposits << ";withdrawals:" << _nbWithdrawals << std::endl;
 }
 
 void	Account::_displayTimestamp( void )
