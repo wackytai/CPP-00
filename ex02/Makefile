@@ -1,10 +1,11 @@
 NAME = account
-SOURCES = account.cpp tests.cpp
+SOURCES = Account.cpp tests.cpp
 CC = @c++
 CCFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address,undefined
 
 all:		$(NAME)
-$(NAME):	$(CC) $(CCFLAGS) $(^) -o $(@)
+$(NAME):	$(SOURCES)
+			$(CC) $(CCFLAGS) $(^) -o $(@)
 
 clean:
 			@rm -f $(OBJS)

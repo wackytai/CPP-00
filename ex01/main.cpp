@@ -83,7 +83,7 @@ int	validate_input(std::string input, int field)
 		case 0: case 1: case 2: case 4:
 			for (int i = 0; input[i]; i++)
 				if ((!std::isalpha(input[i]) && input[i] != 32)
-					|| (input[i + 1] && input[i] == 32 && input[i + 1] == 32))
+					|| (input[i + 1] && input[i] == 32 && input[i + 1] == 32) || (input[0] && !input[1] && input[0] == 32))
 					return 1;
 			break;
 		case 3:
