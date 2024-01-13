@@ -72,7 +72,7 @@ int	PhoneBook::search_contact(void)
 
 void	PhoneBook::printContact(int index)
 {
-	if (index > _currentSize || index < 0)
+	if (index >= _currentSize || index < 0)
 		std::cout << "Index out of range: Can't find contact specified" << std::endl;
 	else
 	{

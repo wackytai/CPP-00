@@ -1,7 +1,7 @@
 NAME = megaphone
 SRC_FILES = megaphone.cpp
 CC = @c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address,undefined
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address,undefined
 
 all:		$(NAME)
 
